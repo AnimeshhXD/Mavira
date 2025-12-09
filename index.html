@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mavira OS - Experience the Future</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #fff0f5;
+            --secondary-bg: #ffe4ec;
+            --accent-pink: #ff66b2;
+            --accent-pink-light: #ff99cc;
+            --accent-purple: #cc66ff;
+            --accent-purple-light: #d9b3ff;
+            --text-primary: #660033;
+            --text-secondary: #993366;
+            --glass-bg: rgba(255, 230, 240, 0.8);
+            --border-color: rgba(255, 102, 178, 0.3);
+            --shadow: 0 10px 30px rgba(255, 102, 178, 0.2);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --cute-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--cute-font);
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255, 230, 240, 0.3) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 204, 229, 0.3) 0%, transparent 20%);
+        }
+
+        /* Sticky Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            padding: 1rem 5%;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            transition: var(--transition);
+            object-fit: contain;
+            border: 2px solid white;
+            box-shadow: 0 4px 10px rgba(255, 102, 178, 0.3);
+        }
+
+        .logo-image:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .logo-text span {
+            color: var(--accent-pink);
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 15px rgba(255, 102, 178, 0.4);
+            font-family: var(--cute-font);
+        }
+
+        .help-btn {
+            background: linear-gradient(90deg, var(--accent-purple-light), var(--accent-pink-light));
+            color: var(--text-primary);
+            padding: 0.6rem 1.4rem;
+            font-size: 0.9rem;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 25px rgba(255, 102, 178, 0.6);
+        }
+
+        .nav-btn.download:hover {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+        }
+
+        .help-btn:hover {
+            background: linear-gradient(90deg, var(--accent-pink-light), var(--accent-purple-light));
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s, transform 1s;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            text-shadow: 2px 2px 4px rgba(255, 204, 229, 0.3);
+        }
+
+        .hero h1.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s 0.3s, transform 1s 0.3s;
+        }
+
+        .hero p.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s 0.6s, transform 1s 0.6s;
+        }
+
+        .hero-btns.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            font-family: var(--cute-font);
+        }
+
+        .primary-btn {
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 102, 178, 0.4);
+        }
+
+        .secondary-btn {
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--accent-pink);
+            border: 2px solid var(--accent-pink);
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-5px);
+        }
+
+        .primary-btn:hover {
+            box-shadow: 0 0 30px rgba(255, 102, 178, 0.7);
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+        }
+
+        .secondary-btn:hover {
+            background: var(--accent-pink);
+            color: white;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3.5rem;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s, transform 0.8s;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: var(--accent-pink);
+            text-shadow: 1px 1px 2px rgba(255, 204, 229, 0.3);
+        }
+
+        .section-title.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        /* Pillars Section */
+        .pillars {
+            background-color: var(--secondary-bg);
+            border-radius: 30px;
+            margin: 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pillars::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--accent-pink-light) 0%, transparent 70%);
+            opacity: 0.5;
+        }
+
+        .pillars::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            right: -50px;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, var(--accent-purple-light) 0%, transparent 70%);
+            opacity: 0.5;
+        }
+
+        .pillars-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .pillar-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(50px) rotateY(10deg);
+            transition: opacity 0.8s, transform 0.8s, box-shadow 0.4s;
+        }
+
+        .pillar-card.animate {
+            opacity: 1;
+            transform: translateY(0) rotateY(0);
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 25px 50px rgba(255, 102, 178, 0.3), 0 0 40px rgba(204, 102, 255, 0.2);
+        }
+
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+        }
+
+        .pillar-number {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 4rem;
+            font-weight: 900;
+            color: rgba(255, 102, 178, 0.1);
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+
+        .pillar-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: var(--accent-pink);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pillar-icon {
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.8rem;
+        }
+
+        .pillar-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .pillar-subtitle::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 1.5rem;
+            height: 1px;
+            background: var(--accent-pink);
+        }
+
+        .pillar-desc {
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        /* Comparison Section */
+        .comparison-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s 0.2s, transform 0.8s 0.2s;
+        }
+
+        .comparison-container.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            background: white;
+        }
+
+        .comparison-table th, .comparison-table td {
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(90deg, var(--accent-pink-light), var(--accent-purple-light));
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: rgba(255, 230, 240, 0.5);
+        }
+
+        .mavira-cell {
+            color: var(--accent-pink);
+            font-weight: 700;
+            position: relative;
+        }
+
+        .mavira-cell::after {
+            content: '♥';
+            color: var(--accent-pink);
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+        }
+
+        .windows-cell {
+            color: #0078d4;
+        }
+
+        .linux-cell {
+            color: #dd4814;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, rgba(255, 102, 178, 0.1), rgba(204, 102, 255, 0.1)) !important;
+        }
+
+        /* Features Section */
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            opacity: 0;
+            transform: translateY(50px) rotateX(10deg);
+            transition: opacity 0.8s, transform 0.8s, box-shadow 0.4s;
+        }
+
+        .feature-card.animate {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) rotateX(0);
+            box-shadow: 0 20px 40px rgba(255, 102, 178, 0.3), 0 0 30px rgba(204, 102, 255, 0.2);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-pink);
+        }
+
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-bg);
+            padding: 4rem 5% 2rem;
+            border-top: 1px solid var(--border-color);
+            border-radius: 30px 30px 0 0;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            color: var(--accent-pink);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            text-decoration: none;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--border-color);
+        }
+
+        .social-link:hover {
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 10px 25px rgba(255, 102, 178, 0.4);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+            width: 100%;
+        }
+
+        /* Cute decorative elements */
+        .cute-element {
+            position: absolute;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .heart {
+            color: var(--accent-pink);
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .star {
+            color: var(--accent-purple);
+            font-size: 1.2rem;
+            opacity: 0.5;
+            animation: float 8s infinite ease-in-out reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        /* Animation Classes */
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .fade-up.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-up {
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        .scale-up.animate {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Download Notification */
+        .download-notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple));
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 102, 178, 0.4);
+            z-index: 10000;
+            animation: slideIn 0.5s ease-out;
+            max-width: 300px;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .comparison-table th, .comparison-table td {
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .pillar-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .logo-image {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .nav-buttons {
+                gap: 0.8rem;
+            }
+            
+            .nav-btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .help-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 5%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-btns {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .comparison-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .pillars-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .pillars {
+                margin: 0 2%;
+            }
+            
+            .logo-image {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .nav-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.85rem;
+            }
+            
+            .help-btn {
+                padding: 0.4rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .logo-image {
+                width: 25px;
+                height: 25px;
+            }
+            
+            .logo-text {
+                font-size: 1.1rem;
+            }
+            
+            .nav-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .pillar-card {
+                padding: 1.5rem 1rem;
+            }
+            
+            .social-link {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .nav-buttons {
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sticky Navigation -->
+    <nav id="navbar">
+        <a href="#" class="logo-container">
+            <img src="mavira.png" alt="Mavira OS Logo" class="logo-image">
+            <div class="logo-text">Mavira<span>OS</span></div>
+        </a>
+        <div class="nav-buttons">
+            <a href="https://github.com/AnimeshhXD" target="_blank" class="nav-btn help-btn">
+                <i class="fas fa-question-circle"></i> Need Help?
+            </a>
+            <a href="#" id="downloadBtn" class="nav-btn download">
+                Download Mav-OS
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg" id="particles"></div>
+        <!-- Cute decorative elements -->
+        <div class="cute-element heart" style="top:20%; left:10%;">♥</div>
+        <div class="cute-element star" style="top:30%; right:15%;">✦</div>
+        <div class="cute-element heart" style="bottom:25%; left:15%;">♥</div>
+        <div class="cute-element star" style="bottom:15%; right:10%;">✦</div>
+        
+        <h1 id="heroTitle">Experience the Future with Mavira OS</h1>
+        <p id="heroSubtitle">A revolutionary operating system designed for speed, privacy, and unparalleled customization. The next generation of computing starts here.</p>
+        <div class="hero-btns" id="heroButtons">
+            <a href="#pillars" class="hero-btn primary-btn">Explore Pillars</a>
+            <a href="https://github.com/AnimeshhXD" target="_blank" class="hero-btn secondary-btn">
+                <i class="fab fa-github"></i> GitHub Docs
+            </a>
+        </div>
+    </section>
+
+    <!-- Pillars Section -->
+    <section class="pillars" id="pillars">
+        <!-- More cute elements -->
+        <div class="cute-element heart" style="top:10%; left:5%;">♥</div>
+        <div class="cute-element star" style="top:15%; right:8%;">✦</div>
+        
+        <h2 class="section-title fade-up">The 4 Distinguishing Pillars</h2>
+        <div class="pillars-container">
+            <!-- Pillar 1: Unified Command Architecture -->
+            <div class="pillar-card fade-up">
+                <div class="pillar-number">01</div>
+                <h3 class="pillar-title"><i class="fas fa-sliders-h pillar-icon"></i> Unified Command Architecture</h3>
+                <p class="pillar-subtitle">Stop digging through config files</p>
+                <p class="pillar-desc">Mavira's Unified Command Hub lets you control everything—from kernel flags to terminal keybinds—in one sleek interface. No more scattered settings across different apps and config files.</p>
+            </div>
+            
+            <!-- Pillar 2: Zero-Latency Fluid UI -->
+            <div class="pillar-card fade-up">
+                <div class="pillar-number">02</div>
+                <h3 class="pillar-title"><i class="fas fa-tachometer-alt pillar-icon"></i> Zero-Latency Fluid UI</h3>
+                <p class="pillar-subtitle">An OS that flows like water</p>
+                <p class="pillar-desc">Built on the 'Mav-Flow' engine, every window snap, scroll, and animation renders at your monitor's native refresh rate with zero lag. Experience buttery-smooth performance that anticipates your next move.</p>
+            </div>
+            
+            <!-- Pillar 3: Hybrid Workflow -->
+            <div class="pillar-card fade-up">
+                <div class="pillar-number">03</div>
+                <h3 class="pillar-title"><i class="fas fa-code pillar-icon"></i> CLI-GUI Hybrid Workflow</h3>
+                <p class="pillar-subtitle">The power of the terminal, the beauty of the desktop</p>
+                <p class="pillar-desc">Drag files into the CLI, pipe commands into GUI notifications. The terminal is deeply integrated into the file explorer and window manager—the barrier is gone.</p>
+            </div>
+            
+            <!-- Pillar 4: Privacy by Architecture -->
+            <div class="pillar-card fade-up">
+                <div class="pillar-number">04</div>
+                <h3 class="pillar-title"><i class="fas fa-shield-alt pillar-icon"></i> Privacy by Architecture</h3>
+                <p class="pillar-subtitle">Your data is yours</p>
+                <p class="pillar-desc">Mavira OS is built on a 'Silent Kernel' architecture—no tracking, no telemetry, just raw performance. Works out of the box without "phoning home".</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison" id="comparison">
+        <!-- Cute elements -->
+        <div class="cute-element star" style="top:10%; right:5%;">✦</div>
+        <div class="cute-element heart" style="bottom:10%; left:5%;">♥</div>
+        
+        <h2 class="section-title fade-up">Mavira OS vs. The Competition</h2>
+        <div class="comparison-container fade-up">
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Windows 11</th>
+                        <th>Ubuntu / Linux</th>
+                        <th>Mavira OS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="highlight">
+                        <td>Customization</td>
+                        <td class="windows-cell">Low</td>
+                        <td class="linux-cell">High (requires coding)</td>
+                        <td class="mavira-cell">Extreme (GUI-based)</td>
+                    </tr>
+                    <tr>
+                        <td>Performance</td>
+                        <td class="windows-cell">Heavy</td>
+                        <td class="linux-cell">Variable</td>
+                        <td class="mavira-cell">Lightweight & Fluid</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td>Settings Management</td>
+                        <td class="windows-cell">Fragmented</td>
+                        <td class="linux-cell">Scattered Configs</td>
+                        <td class="mavira-cell">Unified Global Hub</td>
+                    </tr>
+                    <tr>
+                        <td>Privacy</td>
+                        <td class="windows-cell">Low</td>
+                        <td class="linux-cell">High</td>
+                        <td class="mavira-cell">Absolute</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td>User Interface</td>
+                        <td class="windows-cell">Consistent but Bloated</td>
+                        <td class="linux-cell">Depends on DE</td>
+                        <td class="mavira-cell">Zero-Latency Fluid</td>
+                    </tr>
+                    <tr>
+                        <td>CLI Integration</td>
+                        <td class="windows-cell">PowerShell Separate</td>
+                        <td class="linux-cell">Powerful but Separate</td>
+                        <td class="mavira-cell">Deeply Integrated</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features">
+        <!-- Cute elements -->
+        <div class="cute-element heart" style="top:5%; left:10%;">♥</div>
+        <div class="cute-element star" style="top:20%; right:15%;">✦</div>
+        
+        <h2 class="section-title fade-up">Innovative Features</h2>
+        <div class="features-container">
+            <div class="feature-card fade-up">
+                <div class="feature-icon"><i class="fas fa-cogs"></i></div>
+                <h3 class="feature-title">Global Settings Hub</h3>
+                <p class="feature-desc">One dashboard to control GUI preferences, CLI behaviors, kernel parameters, and system-wide configurations without touching a single config file.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
+                <h3 class="feature-title">Mav-Flow Engine</h3>
+                <p class="feature-desc">GPU-first compositor that delivers consistent 144Hz+ performance even on modest hardware. No screen tearing, no input lag.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon"><i class="fas fa-terminal"></i></div>
+                <h3 class="feature-title">Terminal Integration</h3>
+                <p class="feature-desc">Drag files from GUI to terminal, execute commands with visual feedback, and pipe output directly into GUI applications seamlessly.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon"><i class="fas fa-user-secret"></i></div>
+                <h3 class="feature-title">Silent Kernel</h3>
+                <p class="feature-desc">No network calls on boot, no telemetry hooks, no data collection. Privacy isn't a feature—it's the foundation.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon"><i class="fas fa-layer-group"></i></div>
+                <h3 class="feature-title">Modular Architecture</h3>
+                <p class="feature-desc">Swap out components on-the-fly without rebooting. Replace the window manager, file system, or even the kernel module while the system runs.</p>
+            </div>
+            <div class="feature-card fade-up">
+                <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                <h3 class="feature-title">Instant Updates</h3>
+                <p class="feature-desc">Apply system updates without restarting. Our live-patching technology keeps you secure without interrupting your workflow.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://github.com/AnimeshhXD" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/animesh-animw" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2025 Mavira OS Project. All rights reserved. This is an open-source project.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Create dynamic particle background for hero section with cute theme
+        function createParticleBackground() {
+            const container = document.getElementById('particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                const isHeart = Math.random() > 0.5;
+                
+                if (isHeart) {
+                    particle.innerHTML = '♥';
+                    particle.style.color = Math.random() > 0.5 ? 'var(--accent-pink)' : 'var(--accent-purple)';
+                } else {
+                    particle.innerHTML = '✦';
+                    particle.style.color = Math.random() > 0.5 ? 'var(--accent-pink-light)' : 'var(--accent-purple-light)';
+                }
+                
+                particle.style.position = 'absolute';
+                particle.style.fontSize = Math.random() * 20 + 10 + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.opacity = Math.random() * 0.4 + 0.1;
+                particle.style.zIndex = '-1';
+                
+                // Add animation
+                const duration = Math.random() * 20 + 15;
+                particle.style.animation = `float ${duration}s infinite ease-in-out`;
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize Intersection Observer for scroll animations
+        function initIntersectionObserver() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all elements with animation classes
+            document.querySelectorAll('.fade-up, .scale-up, .section-title, .hero h1, .hero p, .hero-btns, .comparison-container, .pillar-card, .feature-card').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Navbar scroll effect
+        function initNavbarScroll() {
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // Download functionality - Redirects to MediaFire
+        function initDownload() {
+            const downloadBtn = document.getElementById('downloadBtn');
+            
+            downloadBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Store original state
+                const originalText = downloadBtn.textContent;
+                const originalBg = downloadBtn.style.background;
+                
+                // Step 1: Show preparation
+                downloadBtn.textContent = "🔄 Redirecting...";
+                downloadBtn.style.background = "linear-gradient(90deg, #ff99cc, #d9b3ff)";
+                downloadBtn.disabled = true;
+                
+                // Step 2: Show notification
+                showDownloadNotification('info', 'Redirecting to MediaFire...');
+                
+                // Step 3: Redirect after delay (for better UX)
+                setTimeout(() => {
+                  
+                    const mediafireUrl = "http://www.mediafire.com/file/lxbrugiee7qxc14/mavira-os-installer.rar";
+                    
+                    // Open MediaFire in new tab
+                    window.open(mediafireUrl, '_blank');
+                    
+                    // Show success notification
+                    showDownloadNotification('success', 'MediaFire opened in new tab!');
+                    
+                    // Simulate download progress
+                    simulateDownloadProgress(downloadBtn, originalText, originalBg);
+                    
+                }, 1000);
+            });
+        }
+
+        // Simulate download progress
+        function simulateDownloadProgress(btn, originalText, originalBg) {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 5;
+                if (progress <= 100) {
+                    btn.textContent = `⬇️ Downloading... ${progress}%`;
+                } else {
+                    clearInterval(interval);
+                    btn.textContent = "✅ Redirected!";
+                    btn.style.background = "linear-gradient(90deg, #00ff88, #00ffcc)";
+                    
+                    // Reset after 3 seconds
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.style.background = originalBg;
+                        btn.disabled = false;
+                    }, 3000);
+                }
+            }, 100);
+        }
+
+        // Show download notification
+        function showDownloadNotification(type, message) {
+            const notification = document.createElement('div');
+            const icons = {
+                'success': '✅',
+                'error': '❌',
+                'info': '⏳'
+            };
+            const bgColors = {
+                'success': 'linear-gradient(90deg, var(--accent-pink), var(--accent-purple))',
+                'error': 'linear-gradient(90deg, #ff4444, #ff6666)',
+                'info': 'linear-gradient(90deg, #ffcc00, #ffaa00)'
+            };
+            const titles = {
+                'success': 'Redirect Successful!',
+                'error': 'Error',
+                'info': 'Please Wait'
+            };
+            
+            notification.innerHTML = `
+                <div style="
+                    position: fixed;
+                    top: 80px;
+                    right: 20px;
+                    background: ${bgColors[type]};
+                    color: white;
+                    padding: 15px 20px;
+                    border-radius: 10px;
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                    z-index: 10000;
+                    animation: slideIn 0.5s ease-out;
+                    max-width: 300px;
+                ">
+                    <div style="display: flex; align-items: center; margin-bottom: 5px;">
+                        <span style="margin-right: 10px; font-size: 1.2rem;">${icons[type]}</span>
+                        <strong style="font-size: 1.1rem;">
+                            ${titles[type]}
+                        </strong>
+                    </div>
+                    <p style="margin: 0; font-size: 0.9em; opacity: 0.9;">
+                        ${message}
+                    </p>
+                    ${type === 'success' ? 
+                        '<p style="margin: 5px 0 0 0; font-size: 0.8em; opacity: 0.8;"><i class="fas fa-external-link-alt"></i> MediaFire opened in new tab</p>' : 
+                    ''}
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.5s ease-in forwards';
+                setTimeout(() => notification.remove(), 500);
+            }, 5000);
+        }
+
+        // Tilt effect for feature cards
+        function initTiltEffect() {
+            document.querySelectorAll('.feature-card, .pillar-card').forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const cardRect = card.getBoundingClientRect();
+                    const x = e.clientX - cardRect.left;
+                    const y = e.clientY - cardRect.top;
+                    
+                    const centerX = cardRect.width / 2;
+                    const centerY = cardRect.height / 2;
+                    
+                    const rotateY = (x - centerX) / 25;
+                    const rotateX = (centerY - y) / 25;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(-15px)';
+                });
+            });
+        }
+
+        // Add more cute decorative elements
+        function addCuteElements() {
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                // Add a few random cute elements to each section
+                for (let i = 0; i < 3; i++) {
+                    const element = document.createElement('div');
+                    const isHeart = Math.random() > 0.5;
+                    
+                    if (isHeart) {
+                        element.className = 'cute-element heart';
+                        element.innerHTML = '♥';
+                        element.style.color = Math.random() > 0.5 ? 'var(--accent-pink)' : 'var(--accent-purple)';
+                    } else {
+                        element.className = 'cute-element star';
+                        element.innerHTML = '✦';
+                        element.style.color = Math.random() > 0.5 ? 'var(--accent-pink-light)' : 'var(--accent-purple-light)';
+                    }
+                    
+                    element.style.position = 'absolute';
+                    element.style.fontSize = Math.random() * 20 + 10 + 'px';
+                    element.style.left = Math.random() * 90 + 5 + '%';
+                    element.style.top = Math.random() * 90 + 5 + '%';
+                    element.style.opacity = Math.random() * 0.3 + 0.1;
+                    element.style.zIndex = '0';
+                    element.style.animationDelay = Math.random() * 2 + 's';
+                    
+                    section.appendChild(element);
+                }
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticleBackground();
+            initIntersectionObserver();
+            initNavbarScroll();
+            initDownload();
+            initTiltEffect();
+            addCuteElements();
+            
+            // Animate hero elements on load
+            setTimeout(() => {
+                document.getElementById('heroTitle').classList.add('animate');
+                document.getElementById('heroSubtitle').classList.add('animate');
+                document.getElementById('heroButtons').classList.add('animate');
+            }, 500);
+        });
+    </script>
+</body>
+</html>
